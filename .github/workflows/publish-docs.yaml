@@ -46,9 +46,9 @@ jobs:
       - name: Azure Login
         uses: azure/login@v1.3.0
         with:
-          creds: ${{ secrets.AZURE_CREDENTIALS }}
+          creds: ${{ secrets.PSDOCS_SECRET }}
 
       - name: Publish to Azure
         run: |
           cd ./site
-          az webapp up -l '<enter>' -n '<enter>' -g '<enter>' --subscription '<enter>' --html
+          az webapp up -l 'australiaeast' -n 'fieldsnippy' -g 'fieldsnippy' --subscription '5b901222-23da-452d-9a18-28ec481fa756' --html
