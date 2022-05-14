@@ -29,12 +29,14 @@
     ],
     "cSpell.enabledLanguageIds": [
         "csharp",
-        "git-commit", 
+        "git-commit",
         "markdown",
         "plaintext",
         "powershell",
         "text",
         "yaml",
         "yml"
-    ]
+    ],
+    "appService.defaultWebAppToDeploy": "/subscriptions/5b901222-23da-452d-9a18-28ec481fa756/resourceGroups/appsvc_linux_centralus/providers/Microsoft.Web/sites/fieldsnippy",
+    "appService.deploySubpath": "."
 }
