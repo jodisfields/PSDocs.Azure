@@ -44,7 +44,7 @@ jobs:
           outputPath: docs/azure/templates/
           prerelease: true
       - name: Azure Login
-        uses: azure/login@v1.3.0
+        uses: azure/login@v1.4.4
         with:
           creds: ${{ secrets.PSDOCS_SECRET }}
 
