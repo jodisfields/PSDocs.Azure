@@ -1,0 +1,11 @@
+
+.vs/
+out/
+reports/
+**/bin/
+**/obj/
+site/
+**/__pycache__/
+*.user
+.sass-cache
+.jekyll-metadata

@@ -1,0 +1,24 @@
+#
+# PSRule configuration
+#
+
+# Please see the documentation for all configuration options:
+# https://microsoft.github.io/PSRule/
+
+requires:
+  PSRule: '@pre >=1.9.0'
+
+input:
+  pathIgnore:
+  - '.vscode/'
+  - '*.md'
+  - '*.Designer.cs'
+  - '*.resx'
+  - '*.sln'
+  - '*.txt'
+  - '*.html'
+  - '*.ico'
+
+output:
+  culture:
+  - en-US

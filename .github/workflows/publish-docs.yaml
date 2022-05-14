@@ -1,0 +1,54 @@
+name: Publish docs
+on:
+  push:
+    branches: [main]
+jobs:
+  publish:
+    name: Publish
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      # Generate markdown files using PSDocs
+      # Scan for Azure template file recursively in sub-directories
+      # Then generate a docs using a standard naming convention. i.e. <name>_<version>.md
+      - name: Generate docs
+        uses: microsoft/ps-docs@main
+        with:
+          conventions: Azure.NameByParentPath
+          modules: PSDocs,PSDocs.Azure
+          inputPath: templates/
+          outputPath: out/docs/
+          prerelease: true
+      - name: Setup Python
+        uses: actions/setup-python@v2.2.2
+        with:
+          python-version: "3.9"
+          architecture: "x64"
+
+      - name: Install dependencies
+        run: |
+          python3 -m pip install --upgrade pip
+          python3 -m pip install wheel
+          python3 -m pip install -r requirements-docs.txt
+
+      - name: Build site
+        run: mkdocs build
+      # Generate markdown files using PSDocs
+      # Scan for Azure template file recursively in sub-directories
+      - name: Generate docs
+        uses: microsoft/ps-docs@main
+        with:
+          conventions: AddMkDocsMeta
+          modules: PSDocs,PSDocs.Azure
+          outputPath: docs/azure/templates/
+          prerelease: true
+      - name: Azure Login
+        uses: azure/login@v1.3.0
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+      - name: Publish to Azure
+        run: |
+          cd ./site
+          az webapp up -l '<enter>' -n '<enter>' -g '<enter>' --subscription '<enter>' --html
